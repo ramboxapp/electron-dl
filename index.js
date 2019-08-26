@@ -112,7 +112,7 @@ function registerListener(session, options, cb = () => {}) {
 				}
 
 				if (options.openFolderWhenDone) {
-					shell.showItemInFolder(path.join(dir, item.getFilename()));
+					options.saveAs ? shell.showItemInFolder(item.getSavePath()) : shell.showItemInFolder(path.join(dir, item.getFilename()));
 				}
 
 				cb(null, item);
