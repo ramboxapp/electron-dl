@@ -110,9 +110,16 @@ function registerListener(session, options, cb = () => {}) {
 				if (process.platform === 'darwin') {
 					app.dock.downloadFinished(filePath);
 				}
+				if (options.openFileWhenDone) {
+					shell.openItem(path.join(dir, item.getFilename()));
+				}
 
 				if (options.openFolderWhenDone) {
 					options.saveAs ? shell.showItemInFolder(item.getSavePath()) : shell.showItemInFolder(path.join(dir, item.getFilename()));
+				}
+
+				if (typeof options.onDone === 'function') {
+					options.onDone(item.getSavePath());
 				}
 
 				cb(null, item);
