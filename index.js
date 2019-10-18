@@ -108,14 +108,14 @@ function registerListener(session, options, cb = () => {}) {
 				cb(new Error(message));
 			} else if (state === 'completed') {
 				if (process.platform === 'darwin') {
-					app.dock.downloadFinished(filePath);
+					app.dock.downloadFinished(item.getSavePath());
 				}
 				if (options.openFileWhenDone) {
-					shell.openItem(path.join(dir, item.getFilename()));
+					shell.openItem(item.getSavePath());
 				}
 
 				if (options.openFolderWhenDone) {
-					options.saveAs ? shell.showItemInFolder(item.getSavePath()) : shell.showItemInFolder(path.join(dir, item.getFilename()));
+					shell.showItemInFolder(item.getSavePath());
 				}
 
 				if (typeof options.onDone === 'function') {
