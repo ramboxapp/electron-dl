@@ -3,7 +3,7 @@
 	"version": "1.14.0",
 	"description": "Simplified file downloads for your Electron app",
 	"license": "MIT",
-	"repository": "sindresorhus/electron-dl",
+	"repository": "ramboxapp/electron-dl",
 	"publishConfig": { "registry": "https://npm.pkg.github.com/" },
 	"author": {
 		"name": "Sindre Sorhus",
