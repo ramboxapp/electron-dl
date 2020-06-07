@@ -71,7 +71,7 @@ declare namespace electronDl {
 		readonly openFileWhenDone?: boolean;
 		
 		/**
-		Open the downloaded file in the system file manager with the default system app.
+		Callback to do after the file is downloaded
 
 		@default false
 		*/
