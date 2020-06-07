@@ -69,6 +69,13 @@ declare namespace electronDl {
 		@default false
 		*/
 		readonly openFileWhenDone?: boolean;
+		
+		/**
+		Open the downloaded file in the system file manager with the default system app.
+
+		@default false
+		*/
+		readonly onDone?: (path: string) => void;
 
 		/**
 		Shows the file count badge on macOS/Linux dock icons when download is in progress.
