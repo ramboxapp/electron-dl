@@ -79,7 +79,7 @@ function registerListener(session, options, cb = () => {}) {
 			}
 		});
 
-		item.on('done', (event, state) => {
+		item.on('done', async (event, state) => {
 			completedBytes += item.getTotalBytes();
 			downloadItems.delete(item);
 
@@ -111,7 +111,11 @@ function registerListener(session, options, cb = () => {}) {
 					app.dock.downloadFinished(item.getSavePath());
 				}
 				if (options.openFileWhenDone) {
-					shell.openItem(item.getSavePath());
+					try {
+						await shell.openPath(item.getSavePath());
+					} catch (err) {
+						console.error(err)
+					}
 				}
 
 				if (options.openFolderWhenDone) {
