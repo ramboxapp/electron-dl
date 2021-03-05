@@ -48,14 +48,17 @@ function registerListener(session, options, cb = () => {}) {
 
 			filePath = unusedFilename.sync(path.join(dir, name));
 		}
-
+		const extension = filePath.lastIndexOf(".") > 0 ? `.${filePath.substr(filePath.lastIndexOf(".") + 1)}` : '';
 		const errorMessage = options.errorMessage || 'The download of {filename} was interrupted';
 		const errorTitle = options.errorTitle || 'Download Error';
-
-		if (!options.saveAs) {
+		
+		if (options.saveAs) {
+			const path = dialog.showSaveDialogSync(win, { defaultPath: `${filePath}` });
+			path === undefined ? item.cancel() : item.setSavePath(path.lastIndexOf(".") < 0 ? `${path}${extension}` : path);
+		} else { 
 			item.setSavePath(filePath);
 		}
-
+		
 		if (typeof options.onStarted === 'function') {
 			options.onStarted(item);
 		}
