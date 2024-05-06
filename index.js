@@ -43,7 +43,11 @@ function registerListener(session, options, cb = () => {}) {
 		if (options.filename) {
 			filePath = path.join(dir, options.filename);
 		} else {
-			const filename = item.getFilename();
+			let filename = item.getFilename();
+
+			const extension = filename.lastIndexOf(".") > 0 ? `.${filename.substr(filename.lastIndexOf(".") + 1)}` : '';
+			if (filename.length > 200) filename = `${filename.substring(0, 200)}.${extension}`;
+
 			const name = path.extname(filename) ? filename : getFilenameFromMime(filename, item.getMimeType());
 
 			filePath = unusedFilename.sync(path.join(dir, name));
